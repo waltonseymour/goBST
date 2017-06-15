@@ -1,7 +1,6 @@
 package bst
 
 import (
-	"errors"
 	"sort"
 )
 
@@ -13,10 +12,7 @@ func max(a, b int) int {
 }
 
 // assumes sorted input
-func treeHelper(nums ...int) *BST {
-	if !sort.IntsAreSorted(nums) {
-		errors.New("Input should be sorted")
-	}
+func treeHelper(nums []int) *BST {
 	if len(nums) == 0 {
 		return &BST{nil, 0, 0}
 	}
@@ -25,8 +21,8 @@ func treeHelper(nums ...int) *BST {
 	newNode := Node{val: nums[index]}
 	bst := BST{root: &newNode, size: 1, depth: 1}
 	if index != 0 {
-		leftSubTree := treeHelper(nums[:index]...)
-		rightSubTree := treeHelper(nums[index+1:]...)
+		leftSubTree := treeHelper(nums[:index])
+		rightSubTree := treeHelper(nums[index+1:])
 		newNode.left = leftSubTree.root
 		newNode.right = rightSubTree.root
 		bst.size += leftSubTree.size + rightSubTree.size
@@ -36,10 +32,7 @@ func treeHelper(nums ...int) *BST {
 }
 
 // BalancedTree returns a new Balanced BST for a given input
-func BalancedTree(nums ...int) *BST {
-	sorted := make([]int, len(nums))
-	copy(sorted, nums)
-	sort.Ints(sorted)
-	nums = sorted
-	return treeHelper(nums...)
+func BalancedTree(nums []int) *BST {
+	sort.Ints(nums)
+	return treeHelper(nums)
 }

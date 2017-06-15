@@ -22,7 +22,7 @@ func main() {
 	if len(os.Args) > 1 && os.Args[1] == "unbalanced" {
 		tree = bst.BinaryTree(vals...)
 	} else {
-		tree = bst.BalancedTree(vals...)
+		tree = bst.BalancedTree(vals)
 	}
 	fmt.Println("Created a BST with 1M random values")
 	fmt.Println("Max: ", tree.Max())
