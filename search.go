@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"./bst"
+	"github.com/waltonseymour/goBST/bst"
 )
 
 func main() {
